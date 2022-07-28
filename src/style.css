@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.app {
+    padding: 42px 0;
+}
+
+.grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+    grid-template-areas: "a a a a";
+    grid-auto-columns: 277px;
+}
+
+
+.el {
+    border: 1px solid rgba(227, 227, 227, 0.5);
+    border-radius: 4px;
+    background: white;
+    padding: 6px;
+    box-shadow: 0  10px 20px rgba(227, 227, 227, 0.5);
+    position: relative;
+}
+
+
+#custom-tooltip {
+    transition: all .2s ease;
+}
+
+#custom-tooltip .custom-tooltip {
+    padding: 8px 12px;
+    border-radius: 2px;
+    background: rgba(195, 195, 195, 0.8);
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+    transform: translateX(-50%) translateY(10px);
+    position: relative;
+    color: #000;
+    text-align: right;
+}
+
+#custom-tooltip .custom-tooltip::before {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    box-sizing: content-box;
+    border: 6px solid transparent;
+    border-bottom-color: rgba(195, 195, 195, 0.8);
+}
+
+#custom-tooltip .custom-tooltip .price {
+    font-weight: bold;
+    font-size: 12px;
+    padding-bottom: 4px;
+}
