@@ -39,6 +39,8 @@ body {
     position: absolute;
     z-index: 2;
     transition: left .2s ease;
+    user-select: none;
+    pointer-events: none;
 }
 
 [data-custom-tooltip] .custom-tooltip {
