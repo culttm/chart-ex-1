@@ -115,8 +115,6 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         return;
     }
 
-    line.style.height = context.chart.height + 'px'
-
     if (tooltipModel.body) {
         let innerHtml = '';
         const titleLines = tooltipModel.title || [];
@@ -129,26 +127,20 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
 
     showTooltip();
 
-    tooltipEl.style.opacity = '1';
-    tooltipEl.style.position = 'absolute';
-
     const width = ~~tooltipEl.getBoundingClientRect().width;
     const x = ~~tooltipModel.caretX;
 
     let left = (x - (width / 2)) + 'px';
 
-    corner.style.left = x + 'px';
-    tooltipEl.style.left = left;
-    tooltipEl.style.right = 'unset';
 
     if (x < (width / 2)) {
         left = '-8px';
-        tooltipEl.style.left = left;
     } else if ((x + width) > (context.chart.canvas.width - x)) {
-        tooltipEl.style.left = 'unset';
-        tooltipEl.style.right = '-8px';
+        left = ((context.chart.width - width) + 8) + 'px'
     }
 
+    line.style.height = context.chart.height + 'px'
     point.style.top = tooltipModel.caretY + 'px';
-
+    corner.style.left = x + 'px';
+    tooltipEl.style.left = left;
 }
