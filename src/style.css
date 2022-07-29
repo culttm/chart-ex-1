@@ -94,7 +94,6 @@ body {
 
 [data-custom-tooltip] .custom-tooltip .price {
     font-weight: bold;
-    margin-right: 4px;
 }
 
 @media screen and (max-width: 720px) {

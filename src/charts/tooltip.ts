@@ -5,7 +5,7 @@ export const TooltipTpl = (tooltipItem: TooltipItem<any>, data: any): string => 
     return `
         <div class="custom-tooltip">
             <div>
-                <b class="mr-2">$${currentElement?.value}</b>
+                <b class="mr-1">$${currentElement?.value}</b>
                 2 июн.
             </div>
         </div>
