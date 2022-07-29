@@ -21,6 +21,26 @@ export const Data = () => [
     },
     {
         date: new Date(),
+        value: 1.3
+    },
+    {
+        date: new Date(),
+        value: 244
+    },
+    {
+        date: new Date(),
+        value: 11.3
+    },
+    {
+        date: new Date(),
+        value: 233
+    },
+    {
+        date: new Date(),
+        value: 9
+    },
+    {
+        date: new Date(),
         value: 11
     },
     // {
