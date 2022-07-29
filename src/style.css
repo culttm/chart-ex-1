@@ -38,7 +38,7 @@ body {
     top: 2px;
     position: absolute;
     z-index: 2;
-    transition: left .2s ease;
+    transition: left .1s ease;
     pointer-events: none;
 }
 
@@ -67,7 +67,7 @@ body {
     border-top-color: rgba(101, 101, 101, 1);
     opacity: 0;
     visibility: hidden;
-    transition: left .2s ease;
+    transition: left .1s ease;
 }
 
 [data-tooltip-corner] .line {
@@ -80,6 +80,16 @@ body {
     top: 100%;
 }
 
+[data-tooltip] {
+    opacity: 0;
+    visibility: hidden;
+    transition: all .1s ease;
+}
+.item:hover [data-tooltip] {
+    opacity: 1;
+    visibility: visible;
+}
+
 [data-chart] .point {
     display: block;
     width: 4px;
@@ -89,7 +99,7 @@ body {
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    transition: transform .2s ease;
+    transition: transform .1s ease;
 }
 
 [data-custom-tooltip] .custom-tooltip .price {

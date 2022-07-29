@@ -86,15 +86,12 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
     }
 
     const hideTooltip = () => {
-        if (tooltipEl && corner) {
-            tooltipEl.style.width = 'unset';
-            tooltipEl.style.opacity = '0';
-            tooltipEl.style.visibility = 'hidden';
-            corner.style.opacity = '0';
-            corner.style.visibility = 'hidden';
-            point.style.opacity = '0';
-            point.style.visibility = 'hidden';
-        }
+        tooltipEl.style.opacity = '0';
+        tooltipEl.style.visibility = 'hidden';
+        corner.style.opacity = '0';
+        corner.style.visibility = 'hidden';
+        point.style.opacity = '0';
+        point.style.visibility = 'hidden';
     }
 
     if (!tooltipEl) {
@@ -115,7 +112,7 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
 
         corner = document.createElement('div');
         corner.dataset['tooltipCorner'] = ''
-        corner.innerHTML += '<div class="line"></div>'
+        corner.innerHTML += '<div class="line"></div>';
         tooltipRoot.appendChild(corner);
         line = corner?.querySelector('.line') as HTMLDivElement;
         appChart?.addEventListener('mouseleave', hideTooltip.bind(this));
