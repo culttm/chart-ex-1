@@ -4,10 +4,8 @@ export const TooltipTpl = (tooltipItem: TooltipItem<any>, data: any): string => 
     const currentElement = data.find(({ value }: any) => tooltipItem.parsed.y === value);
     return `
         <div class="custom-tooltip">
-            <div class="price">
-                $${currentElement?.value}
-            </div>
-            <div class="date">
+            <div>
+                <b>$${currentElement?.value}</b>
                2 июн.
             </div>
         </div>
@@ -80,15 +78,16 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
     }
 
     const hideTooltip = () => {
-        tooltipEl.style.width = 'unset';
-        tooltipEl.style.opacity = '0';
-        tooltipEl.style.visibility = 'hidden';
-        corner.style.opacity = '0';
-        corner.style.visibility = 'hidden';
-
-        tooltipRoot.removeChild(tooltipEl)
-        tooltipRoot.removeChild(corner)
+        if (tooltipEl && corner) {
+            tooltipEl.style.width = 'unset';
+            tooltipEl.style.opacity = '0';
+            tooltipEl.style.visibility = 'hidden';
+            corner.style.opacity = '0';
+            corner.style.visibility = 'hidden';
+        }
     }
+
+    appChart?.addEventListener('mouseleave', hideTooltip.bind(this))
 
     if (!tooltipEl) {
         tooltipEl = document.createElement('div');
@@ -102,7 +101,7 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
 
 
     if (tooltipModel.opacity === 0) {
-        hideTooltip();
+        // hideTooltip();
         return;
     }
 
