@@ -39,7 +39,6 @@ body {
     position: absolute;
     z-index: 2;
     transition: left .2s ease;
-    user-select: none;
     pointer-events: none;
 }
 
@@ -81,15 +80,16 @@ body {
     top: 100%;
 }
 
-[data-tooltip-corner] .point {
+[data-chart] .point {
     display: block;
     width: 4px;
     height: 4px;
     border-radius: 50%;
     background: rgba(0, 200, 83, 1);
     position: absolute;
-    left: 50%;
-    transform: translate3d(-50%, 0, 0);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform .2s ease;
 }
 
 [data-custom-tooltip] .custom-tooltip .price {

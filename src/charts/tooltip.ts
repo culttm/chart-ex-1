@@ -5,8 +5,8 @@ export const TooltipTpl = (tooltipItem: TooltipItem<any>, data: any): string => 
     return `
         <div class="custom-tooltip">
             <div>
-                <b>$${currentElement?.value}</b>
-               2 июн.
+                <b class="mr-2">$${currentElement?.value}</b>
+                2 июн.
             </div>
         </div>
     `
@@ -66,13 +66,14 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
     const tId = 'data-custom-tooltip';
 
     const appChart = context.chart.canvas.closest('[data-chart]');
+    const canvasChart = context.chart.canvas.closest('[data-canvas-root]');
     const tooltipRoot = appChart?.querySelector('[data-tooltip]') as HTMLDivElement;
     const tooltipModel = context.tooltip;
 
     let tooltipEl = tooltipRoot?.querySelector(`[${tId}]`) as HTMLDivElement;
     let corner = tooltipRoot?.querySelector('[data-tooltip-corner]') as HTMLDivElement;
     let line = corner?.querySelector('.line') as HTMLDivElement;
-    let point = line?.querySelector('.point') as HTMLDivElement;
+    let point = canvasChart?.querySelector('.point') as HTMLDivElement;
 
 
     const showTooltip = () => {
@@ -80,7 +81,8 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         tooltipEl.style.visibility = 'visible';
         corner.style.opacity = '1';
         corner.style.visibility = 'visible';
-        point.classList.add('vis');
+        point.style.opacity = '1';
+        point.style.visibility = 'visible';
     }
 
     const hideTooltip = () => {
@@ -90,23 +92,32 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
             tooltipEl.style.visibility = 'hidden';
             corner.style.opacity = '0';
             corner.style.visibility = 'hidden';
-            point.classList.remove('vis')
+            point.style.opacity = '0';
+            point.style.visibility = 'hidden';
         }
     }
 
     if (!tooltipEl) {
         tooltipEl = document.createElement('div');
-        tooltipEl.dataset['customTooltip'] = '{}';
+        tooltipEl.dataset['customTooltip'] = '';
 
         tooltipEl.innerHTML += '<div data-tooltop-root></div>';
         tooltipRoot.appendChild(tooltipEl);
 
+        point = document.createElement('div');
+
+        point.classList.add('point')
+
+        point.style.left = '0';
+        point.style.top = '0';
+        point.style.transform = `translate3d(${~~tooltipModel.caretX - 2}px, ${~~tooltipModel.caretY - 2}px, 0)`;
+        canvasChart?.appendChild(point);
+
         corner = document.createElement('div');
         corner.dataset['tooltipCorner'] = ''
-        corner.innerHTML += '<div class="line"><div class="point"></div></div>'
+        corner.innerHTML += '<div class="line"></div>'
         tooltipRoot.appendChild(corner);
         line = corner?.querySelector('.line') as HTMLDivElement;
-        point = line?.querySelector('.point') as HTMLDivElement;
         appChart?.addEventListener('mouseleave', hideTooltip.bind(this));
     }
 
@@ -139,8 +150,8 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         left = ((context.chart.width - width) + 8) + 'px'
     }
 
-    line.style.height = context.chart.height + 'px'
-    point.style.top = tooltipModel.caretY + 'px';
+    point.style.transform = `translate3d(${~~tooltipModel.caretX - 2}px, ${~~tooltipModel.caretY - 2}px, 0)`;
+    line.style.height = context.chart.height + 'px';
     corner.style.left = x + 'px';
     tooltipEl.style.left = left;
 }
