@@ -63,12 +63,15 @@ export const TooltipExternal = (context: { chart: Chart; tooltip: TooltipModel<a
 }
 
 export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipModel<any> }) => {
+    const tId = 'data-custom-tooltip';
+
     const appChart = context.chart.canvas.closest('[data-chart]');
     const tooltipRoot = appChart?.querySelector('[data-tooltip]') as HTMLDivElement;
-    const tId = 'data-custom-tooltip';
+    const tooltipModel = context.tooltip;
+
     let tooltipEl = tooltipRoot?.querySelector(`[${tId}]`) as HTMLDivElement;
     let corner = tooltipRoot?.querySelector('[data-tooltip-corner]') as HTMLDivElement;
-    const tooltipModel = context.tooltip;
+
 
     const showTooltip = () => {
         tooltipEl.style.opacity = '1';
@@ -89,14 +92,16 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
 
     if (!tooltipEl) {
         tooltipEl = document.createElement('div');
-        tooltipEl.dataset['customTooltip'] = ''
+        tooltipEl.dataset['customTooltip'] = '{}';
+
         tooltipEl.innerHTML += '<div data-tooltop-root></div>';
         tooltipRoot.appendChild(tooltipEl);
+
         corner = document.createElement('div');
         corner.dataset['tooltipCorner'] = ''
         tooltipRoot.appendChild(corner);
-        appChart?.addEventListener('mouseleave', hideTooltip.bind(this))
-        tooltipEl?.addEventListener('mouseleave', hideTooltip.bind(this))
+
+        appChart?.addEventListener('mouseleave', hideTooltip.bind(this));
     }
 
     if (tooltipModel.opacity === 0) {
