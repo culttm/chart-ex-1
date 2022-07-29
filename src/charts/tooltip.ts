@@ -8,7 +8,7 @@ export const TooltipTpl = (tooltipItem: TooltipItem<any>, data: any): string => 
                 $${currentElement?.value}
             </div>
             <div class="date">
-                ${(currentElement?.date as Date).toLocaleDateString()}
+               2 июн.
             </div>
         </div>
     `
