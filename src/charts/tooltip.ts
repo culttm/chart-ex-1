@@ -87,8 +87,6 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         }
     }
 
-    appChart?.addEventListener('mouseleave', hideTooltip.bind(this))
-
     if (!tooltipEl) {
         tooltipEl = document.createElement('div');
         tooltipEl.dataset['customTooltip'] = ''
@@ -97,11 +95,11 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         corner = document.createElement('div');
         corner.dataset['tooltipCorner'] = ''
         tooltipRoot.appendChild(corner);
+        appChart?.addEventListener('mouseleave', hideTooltip.bind(this))
+        tooltipEl?.addEventListener('mouseleave', hideTooltip.bind(this))
     }
 
-
     if (tooltipModel.opacity === 0) {
-        // hideTooltip();
         return;
     }
 
