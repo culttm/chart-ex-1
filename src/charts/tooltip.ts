@@ -138,11 +138,11 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
 
     showTooltip();
 
-    const width = ~~tooltipEl.getBoundingClientRect().width;
-    const x = ~~tooltipModel.caretX;
+    const width = tooltipEl.getBoundingClientRect().width;
+    const x = tooltipModel.caretX;
+    const y = tooltipModel.caretY;
 
     let left = (x - (width / 2)) + 'px';
-
 
     if (x < (width / 2)) {
         left = '-8px';
@@ -150,8 +150,8 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         left = ((context.chart.width - width) + 8) + 'px'
     }
 
-    point.style.transform = `translate3d(${~~tooltipModel.caretX - 2}px, ${~~tooltipModel.caretY - 2}px, 0)`;
-    line.style.height = context.chart.height + 'px';
+    point.style.transform = `translate3d(${x - 2}px, ${y - 2}px, 0)`;
+    line.style.height = context.chart.height - (context.chart.height - y) + 'px';
     corner.style.left = x + 'px';
     tooltipEl.style.left = left;
 }

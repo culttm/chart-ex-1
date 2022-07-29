@@ -12,8 +12,16 @@ export const Example1 = (app: HTMLDivElement) => {
     const canvas = app.querySelector('canvas') as HTMLCanvasElement;
     const data = Data();
     const generateLabels = () => Array.from({length: data.length}, () => '');
+    const pointRadius = () => Array.from({length: data.length}, (_, i) => {
+        if (i === 0 || i === data.length - 1) return 2
+        return 0
+    });
     const labels =  generateLabels();
+
+
     const gradientPlugin = new GradientPlugin(baseColorRgb);
+
+    const pointRadiusValue = pointRadius();
 
     new Chart(canvas, {
         type: 'line',
@@ -21,7 +29,7 @@ export const Example1 = (app: HTMLDivElement) => {
             labels,
             datasets: [
                 {
-                    borderWidth: 1,
+                    borderWidth: 0.5,
                     borderColor: baseColor,
                     fill: true,
                     data: data.map(({ value }) => value),
@@ -29,7 +37,7 @@ export const Example1 = (app: HTMLDivElement) => {
                     hoverBackgroundColor: baseColor,
                     pointBorderWidth: 0,
                     pointHitRadius: 0,
-                    pointRadius: 0,
+                    pointRadius: pointRadiusValue,
                     pointHoverRadius: 0,
                     hoverBorderWidth: 0,
                     tension: 0,
