@@ -8,62 +8,68 @@ body {
     box-sizing: border-box;
 }
 
-.app {
-    padding: 42px 0;
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+@media screen and (min-width: 720px) {
+    .container {
+        width: 720px;
+    }
 }
 
-.grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    gap: 24px;
-    grid-template-areas: "a a a a";
-    grid-auto-columns: 277px;
+@media screen and (min-width: 960px) {
+    .container {
+        width: 960px;
+    }
 }
 
-
-.el {
-    border: 1px solid rgba(227, 227, 227, 0.5);
-    border-radius: 4px;
-    background: white;
-    padding: 6px;
-    box-shadow: 0  10px 20px rgba(227, 227, 227, 0.5);
-    position: relative;
+@media screen and (min-width: 1200px) {
+    .container {
+        width: 1200px;
+    }
+}
+.overflow-hidden {
+    overflow: hidden;
 }
 
-
-#custom-tooltip {
-    transition: all .2s ease;
-}
-
-#custom-tooltip .custom-tooltip {
-    padding: 8px 12px;
-    border-radius: 2px;
-    background: rgba(195, 195, 195, 0.8);
-    font-size: 10px;
-    font-family: 'Open Sans', sans-serif;
-    transform: translateX(-50%) translateY(10px);
-    position: relative;
-    color: #000;
-    text-align: right;
-}
-
-#custom-tooltip .custom-tooltip::before {
-    display: block;
-    content: '';
+[data-custom-tooltip] {
+    top: 2px;
     position: absolute;
-    left: 50%;
-    top: -12px;
+    z-index: 2;
+    transition: left .05s ease;
+}
+
+[data-custom-tooltip] .custom-tooltip {
+    padding: 5px 6px;
+    border-radius: 3px;
+    background: rgba(101, 101, 101, 1);
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+[data-tooltip-corner] {
+    position: absolute;
+    top: 30px;
+    bottom: -8px;
     transform: translateX(-50%);
     width: 0;
     height: 0;
     box-sizing: content-box;
-    border: 6px solid transparent;
-    border-bottom-color: rgba(195, 195, 195, 0.8);
+    border: 4px solid transparent;
+    border-top-color: rgba(101, 101, 101, 1);
+    opacity: 0;
+    visibility: hidden;
+    transition: left .05s ease;
 }
 
-#custom-tooltip .custom-tooltip .price {
+[data-custom-tooltip] .custom-tooltip .price {
     font-weight: bold;
-    font-size: 12px;
-    padding-bottom: 4px;
+    margin-right: 4px;
 }

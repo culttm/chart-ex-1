@@ -5,29 +5,66 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
     <title>Vite + TS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          container: false,
+        },
+      }
+    </script>
   </head>
   <body>
 
-    <div class="app">
-      <div class="grid">
-        <div class="el">
-          <canvas data-chart></canvas>
+    <div class="py-24">
+      <div class="container sm:px-3 px-3 mx-auto">
+        <div class="grid gap-6 grid-cols-1 bg-green-200 sm:bg-white md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 relative">
+          <div class="rounded bg-white relative overflow-hidden shadow p-4 group">
+            <div class="bg-gray-200 rounded h-[200px] mb-4"></div>
+            <div data-chart class="relative">
+              <div data-tooltip class="relative h-9"></div>
+              <div class="h-[54px] pb-2 mb-2 border-b borcer-solid border-gray-300 "><canvas></canvas></div>
+              <div class="flex justify-between">
+                <div class="text-gray-500 text-xs">$380 (29 dec)</div>
+                <div class="text-gray-500 text-xs">$350 (17 jan)</div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded bg-white relative overflow-hidden shadow p-4 group">
+            <div class="bg-gray-200 rounded h-[200px] mb-4"></div>
+            <div data-chart class="relative">
+              <div data-tooltip class="relative h-9"></div>
+              <div class="h-[54px] pb-2 mb-2 border-b borcer-solid border-gray-300 "><canvas></canvas></div>
+              <div class="flex justify-between">
+                <div class="text-gray-500 text-xs">$380 (29 dec)</div>
+                <div class="text-gray-500 text-xs">$350 (17 jan)</div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded bg-white relative overflow-hidden shadow p-4 group">
+            <div class="bg-gray-200 rounded h-[200px] mb-4"></div>
+            <div data-chart class="relative">
+              <div data-tooltip class="relative h-9"></div>
+              <div class="h-[54px] pb-2 mb-2 border-b borcer-solid border-gray-300 "><canvas></canvas></div>
+              <div class="flex justify-between">
+                <div class="text-gray-500 text-xs">$380 (29 dec)</div>
+                <div class="text-gray-500 text-xs">$350 (17 jan)</div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded bg-white relative overflow-hidden shadow p-4 group">
+            <div class="bg-gray-200 rounded h-[200px] mb-4"></div>
+            <div data-chart class="relative">
+              <div data-tooltip class="relative h-9"></div>
+              <div class="h-[54px] pb-2 mb-2 border-b borcer-solid border-gray-300 "><canvas></canvas></div>
+              <div class="flex justify-between">
+                <div class="text-gray-500 text-xs">$380 (29 dec)</div>
+                <div class="text-gray-500 text-xs">$350 (17 jan)</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="el">
-          <canvas data-chart></canvas>
-        </div>
-        <div class="el">
-          <canvas data-chart></canvas>
-        </div>
-        <div class="el">
-          <canvas data-chart></canvas>
-        </div>
-        <div class="el">
-          <canvas data-chart></canvas>
-        </div>
-        <div class="el">
-          <canvas data-chart></canvas>
-        </div>
+
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
