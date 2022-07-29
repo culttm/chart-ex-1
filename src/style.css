@@ -81,18 +81,13 @@ body {
 
 [data-tooltip-corner] .point {
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     background: rgba(0, 200, 83, 1);
     position: absolute;
     left: 50%;
-    transform: translate3d(-50%, 0, 0) scale(0);
-    transition: scale .2s ease;
-}
-
-[data-tooltip-corner] .point.vis {
-    transform: translate3d(-50%, -50%, 0) scale(1);
+    transform: translate3d(-50%, 0, 0);
 }
 
 [data-custom-tooltip] .custom-tooltip .price {

@@ -21,6 +21,8 @@ export const Example1 = (app: HTMLDivElement) => {
 
     const gradientPlugin = new GradientPlugin(baseColorRgb);
 
+    const pointRadiusValue = pointRadius();
+
     new Chart(canvas, {
         type: 'line',
         data: {
@@ -35,8 +37,8 @@ export const Example1 = (app: HTMLDivElement) => {
                     hoverBackgroundColor: baseColor,
                     pointBorderWidth: 0,
                     pointHitRadius: 0,
-                    pointRadius: pointRadius(),
-                    pointHoverRadius: pointRadius(),
+                    pointRadius: pointRadiusValue,
+                    pointHoverRadius: pointRadiusValue,
                     hoverBorderWidth: 0,
                     tension: 0,
                     spanGaps: false

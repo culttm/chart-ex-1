@@ -1,12 +1,28 @@
 export const Data = () => [
-    // {
-    //     date: new Date(),
-    //     value: 10.5
-    // },
-    // {
-    //     date: new Date(),
-    //     value: 11
-    // },
+    {
+        date: new Date(),
+        value: 10.5
+    },
+    {
+        date: new Date(),
+        value: 11
+    },
+    {
+        date: new Date(),
+        value: 11
+    },
+    {
+        date: new Date(),
+        value: 11
+    },
+    {
+        date: new Date(),
+        value: 11
+    },
+    {
+        date: new Date(),
+        value: 11
+    },
     // {
     //     date: new Date(),
     //     value: 10
@@ -103,60 +119,60 @@ export const Data = () => [
     //     date: new Date(),
     //     value: ~~(Math.random() * 100) + 2
     // },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    },
-    {
-        date: new Date(),
-        value: ~~(Math.random() * 100) + 2
-    }
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // },
+    // {
+    //     date: new Date(),
+    //     value: ~~(Math.random() * 100) + 2
+    // }
 ]

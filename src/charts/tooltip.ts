@@ -149,6 +149,6 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         tooltipEl.style.right = '-8px';
     }
 
-    point.style.top = tooltipModel.caretY + 1.5 + 'px';
+    point.style.top = tooltipModel.caretY + 'px';
 
 }
