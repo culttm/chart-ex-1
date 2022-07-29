@@ -69,6 +69,32 @@ body {
     transition: left .05s ease;
 }
 
+[data-tooltip-corner] .line {
+    display: block;
+    width: 1px;
+    background: rgba(0, 200, 83, .6);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%
+}
+
+[data-tooltip-corner] .point {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(0, 200, 83, 1);
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0) scale(0);
+    transition: scale .2s ease;
+}
+
+[data-tooltip-corner] .point.vis {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+}
+
 [data-custom-tooltip] .custom-tooltip .price {
     font-weight: bold;
     margin-right: 4px;

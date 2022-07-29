@@ -1,7 +1,6 @@
 import {Chart, registerables, TooltipItem, TooltipModel} from "chart.js";
 import {Data} from "./data";
 import {GradientPlugin} from "./gradient.plugin";
-import {LinePlugin} from "./line.plugin";
 import {TooltipExternalTop, TooltipTpl} from "./tooltip";
 
 Chart.register(...registerables);
@@ -21,7 +20,6 @@ export const Example1 = (app: HTMLDivElement) => {
 
 
     const gradientPlugin = new GradientPlugin(baseColorRgb);
-    const linePlugin = new LinePlugin(baseColorRgb);
 
     new Chart(canvas, {
         type: 'line',
@@ -38,7 +36,7 @@ export const Example1 = (app: HTMLDivElement) => {
                     pointBorderWidth: 0,
                     pointHitRadius: 0,
                     pointRadius: pointRadius(),
-                    pointHoverRadius: 3,
+                    pointHoverRadius: pointRadius(),
                     hoverBorderWidth: 0,
                     tension: 0,
                     spanGaps: false
@@ -91,7 +89,6 @@ export const Example1 = (app: HTMLDivElement) => {
         },
         plugins: [
             gradientPlugin.getPlugin(),
-            linePlugin.getPlugin(),
         ],
 
     })

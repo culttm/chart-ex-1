@@ -71,6 +71,8 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
 
     let tooltipEl = tooltipRoot?.querySelector(`[${tId}]`) as HTMLDivElement;
     let corner = tooltipRoot?.querySelector('[data-tooltip-corner]') as HTMLDivElement;
+    let line = corner?.querySelector('.line') as HTMLDivElement;
+    let point = line?.querySelector('.point') as HTMLDivElement;
 
 
     const showTooltip = () => {
@@ -78,6 +80,7 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
         tooltipEl.style.visibility = 'visible';
         corner.style.opacity = '1';
         corner.style.visibility = 'visible';
+        point.classList.add('vis');
     }
 
     const hideTooltip = () => {
@@ -87,6 +90,7 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
             tooltipEl.style.visibility = 'hidden';
             corner.style.opacity = '0';
             corner.style.visibility = 'hidden';
+            point.classList.remove('vis')
         }
     }
 
@@ -99,14 +103,19 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
 
         corner = document.createElement('div');
         corner.dataset['tooltipCorner'] = ''
+        corner.innerHTML += '<div class="line"><div class="point"></div></div>'
         tooltipRoot.appendChild(corner);
-
+        line = corner?.querySelector('.line') as HTMLDivElement;
+        point = line?.querySelector('.point') as HTMLDivElement;
         appChart?.addEventListener('mouseleave', hideTooltip.bind(this));
     }
+
 
     if (tooltipModel.opacity === 0) {
         return;
     }
+
+    line.style.height = context.chart.height + 'px'
 
     if (tooltipModel.body) {
         let innerHtml = '';
@@ -126,7 +135,6 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
     const width = ~~tooltipEl.getBoundingClientRect().width;
     const x = ~~tooltipModel.caretX;
 
-
     let left = (x - (width / 2)) + 'px';
 
     corner.style.left = x + 'px';
@@ -136,9 +144,11 @@ export const TooltipExternalTop = (context: { chart: Chart; tooltip: TooltipMode
     if (x < (width / 2)) {
         left = '-8px';
         tooltipEl.style.left = left;
-    } else if ((x + ((width))) > (context.chart.canvas.width - x)) {
+    } else if ((x + width) > (context.chart.canvas.width - x)) {
         tooltipEl.style.left = 'unset';
         tooltipEl.style.right = '-8px';
     }
+
+    point.style.top = tooltipModel.caretY + 1.5 + 'px';
 
 }
