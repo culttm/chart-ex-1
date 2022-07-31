@@ -26,7 +26,7 @@ function roundedRect(x: number, y: number, width: number, height: number, radius
     return path;
 }
 
-export class LinePlugin {
+export class CustomTooltipPlugin {
 
     constructor(private color: string) {
     }
@@ -55,44 +55,43 @@ export class LinePlugin {
         const priceText = `$${tooltipData.value}`;
         const partPriceWidth = ctx.measureText(priceText).width;
 
-        ctx.font = 'normal 10px sans-serif';
+        ctx.font = 'normal 11px sans-serif';
         const dateText = `(${tooltipData.label})`;
         const partDateWidth = ctx.measureText(dateText).width;
 
 
-        const width = (partPriceWidth + partDateWidth) + 14;
-
-
         const height = 24;
+        const width = (partPriceWidth + partDateWidth) + 16;
+
 
         let left = x - (width / 2);
         let pontLeft = (left + width / 2);
 
         if (x < (width / 2)) {
             left = 0;
-        } else if ((x + width) > (chart.canvas.width - x)) {
-            left = chart.width - width
+        } else if ((x + width) > ((chart.canvas.clientWidth * 2) - x)) {
+            left = chart.canvas.clientWidth - width
         }
 
         ctx.save();
         ctx.beginPath();
 
         // Box
-        ctx.fillStyle ='rgba(101, 101, 101, 1)';
+        ctx.fillStyle = 'rgba(101, 101, 101, 1)';
         ctx.fill(roundedRect(left, 0, width, height, 4, pontLeft, 4))
 
         //Text
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 10px sans-serif';
-        ctx.fillText(`${priceText}`, left + 6, 16);
-        ctx.font = 'normal 10px sans-serif';
-        ctx.fillText(`${dateText}`, left + partPriceWidth + 8, 16);
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText(`${priceText}`, left + 8, 16);
+        ctx.font = 'normal 11px sans-serif';
+        ctx.fillText(`${dateText}`, left + partPriceWidth + 10, 16);
 
         //Line
-        ctx.moveTo(x, yAxis.top - 16);
-        ctx.lineTo(x, yAxis.bottom);
+        ctx.moveTo(x, yAxis.top - 14);
+        ctx.lineTo(x, yAxis.bottom + 8);
         ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba('+ this.color +', 0.40)';
+        ctx.strokeStyle = 'rgba(' + this.color + ', .9)';
         ctx.stroke();
 
         ctx.restore();
@@ -100,7 +99,7 @@ export class LinePlugin {
 
     getPlugin() {
         return {
-            id: "drawLineVertical",
+            id: "drawCustomTooltip",
             afterDraw: this.plugin.bind(this)
         }
     }

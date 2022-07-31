@@ -1,14 +1,16 @@
 import {Chart, registerables} from "chart.js";
 import {Data} from "./data";
 import {GradientPlugin} from "./gradient.plugin";
-import { LinePlugin } from './line.plugin'
+import { CustomTooltipPlugin } from './custom-tooltip.plugin'
+import { FooterPlugin } from './footer.plugin'
 Chart.register(...registerables);
 
 
-const baseColor = '#00C853';
+const baseColor = 'rgba(0, 200, 83, 1)';
 const baseColorRgb = '0, 200, 83';
-
-const linePlugin = new LinePlugin(baseColorRgb);
+const customTooltip = new CustomTooltipPlugin(baseColorRgb);
+const gradientPlugin = new GradientPlugin(baseColorRgb);
+const footerPlugin = new FooterPlugin();
 
 export const Example1 = (app: HTMLDivElement) => {
     const canvas = app.querySelector('canvas') as HTMLCanvasElement;
@@ -17,8 +19,6 @@ export const Example1 = (app: HTMLDivElement) => {
         if (i === 0 || i === data.length - 1) return 2
         return 0
     });
-
-    const gradientPlugin = new GradientPlugin(baseColorRgb);
     const pointRadiusValue = pointRadius();
 
     new Chart(canvas, {
@@ -27,7 +27,7 @@ export const Example1 = (app: HTMLDivElement) => {
             labels: data.map(({ date }) => date),
             datasets: [
                 {
-                    borderWidth: 0.5,
+                    borderWidth: 1,
                     borderColor: baseColor,
                     fill: true,
                     data: data.map(({ value }) => value),
@@ -50,7 +50,7 @@ export const Example1 = (app: HTMLDivElement) => {
                     top: 42,
                     left: 12,
                     right: 12,
-                    bottom: 0
+                    bottom: 32
                 },
             },
             plugins: {
@@ -77,7 +77,8 @@ export const Example1 = (app: HTMLDivElement) => {
         },
         plugins: [
             gradientPlugin.getPlugin(),
-            linePlugin.getPlugin()
+            customTooltip.getPlugin(),
+            footerPlugin.getPlugin()
         ],
 
     })
