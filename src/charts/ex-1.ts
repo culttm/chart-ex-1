@@ -15,6 +15,7 @@ const footerPlugin = new FooterPlugin();
 export const Example1 = (app: HTMLDivElement) => {
     const canvas = app.querySelector('canvas') as HTMLCanvasElement;
     const data = Data();
+    console.log(data.length)
     const pointRadius = () => Array.from({length: data.length}, (_, i) => {
         if (i === 0 || i === data.length - 1) return 2
         return 0
