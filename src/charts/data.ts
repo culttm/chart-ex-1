@@ -483,5 +483,10 @@ export const Data = () => [
 
 export const generateData = () => {
     const rawData = Data();
-    return rawData.slice(0, Math.floor(Math.random() * rawData.length) + 2)
+    const d = rawData.slice(0, Math.floor(Math.random() * rawData.length) + 1);
+    if (d.length >= 2) {
+        return d;
+    }
+
+    return [d[0], d[0]];
 }
