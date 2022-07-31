@@ -13,6 +13,7 @@
     "vite": "^3.0.0"
   },
   "dependencies": {
+    "@types/chart.js": "^2.9.37",
     "chart.js": "^3.8.0",
     "konva": "^8.3.10"
   }

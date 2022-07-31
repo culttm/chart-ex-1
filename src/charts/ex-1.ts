@@ -1,32 +1,30 @@
-import {Chart, registerables, TooltipItem, TooltipModel} from "chart.js";
+import {Chart, registerables} from "chart.js";
 import {Data} from "./data";
 import {GradientPlugin} from "./gradient.plugin";
-import {TooltipExternalTop, TooltipTpl} from "./tooltip";
-
+import { LinePlugin } from './line.plugin'
 Chart.register(...registerables);
+
 
 const baseColor = '#00C853';
 const baseColorRgb = '0, 200, 83';
 
+const linePlugin = new LinePlugin(baseColorRgb);
+
 export const Example1 = (app: HTMLDivElement) => {
     const canvas = app.querySelector('canvas') as HTMLCanvasElement;
     const data = Data();
-    const generateLabels = () => Array.from({length: data.length}, () => '');
     const pointRadius = () => Array.from({length: data.length}, (_, i) => {
         if (i === 0 || i === data.length - 1) return 2
         return 0
     });
-    const labels =  generateLabels();
-
 
     const gradientPlugin = new GradientPlugin(baseColorRgb);
-
     const pointRadiusValue = pointRadius();
 
     new Chart(canvas, {
         type: 'line',
         data: {
-            labels,
+            labels: data.map(({ date }) => date),
             datasets: [
                 {
                     borderWidth: 0.5,
@@ -35,10 +33,10 @@ export const Example1 = (app: HTMLDivElement) => {
                     data: data.map(({ value }) => value),
                     pointBackgroundColor: baseColor,
                     hoverBackgroundColor: baseColor,
+                    pointRadius: pointRadiusValue,
                     pointBorderWidth: 0,
                     pointHitRadius: 0,
-                    pointRadius: pointRadiusValue,
-                    pointHoverRadius: 0,
+                    pointHoverRadius: 3,
                     hoverBorderWidth: 0,
                     tension: 0,
                     spanGaps: false
@@ -48,7 +46,12 @@ export const Example1 = (app: HTMLDivElement) => {
         options: {
             maintainAspectRatio: false,
             layout: {
-                padding: 0,
+                padding: {
+                    top: 42,
+                    left: 12,
+                    right: 12,
+                    bottom: 0
+                },
             },
             plugins: {
                 legend: {
@@ -56,23 +59,6 @@ export const Example1 = (app: HTMLDivElement) => {
                 },
                 tooltip: {
                     enabled: false,
-                    intersect: false,
-                    axis: 'x',
-                    displayColors: false,
-                    backgroundColor: baseColor,
-                    bodyColor: '#333',
-                    bodyAlign: 'right',
-                    footerColor: '#303030',
-                    padding: 10,
-                    cornerRadius: 4,
-                    footerFont: {
-                        weight: 'normal',
-                        size: 10,
-                    },
-                    callbacks: {
-                        label: (tooltipItem: TooltipItem<any>) => TooltipTpl(tooltipItem, data)
-                    },
-                    external: (ctx: { chart: Chart; tooltip: TooltipModel<any> }) => TooltipExternalTop(ctx)
                 },
             },
             scales: {
@@ -80,7 +66,7 @@ export const Example1 = (app: HTMLDivElement) => {
                     display: false
                 },
                 y: {
-                    display: false
+                    display: false,
                 },
             },
             responsive: true,
@@ -91,6 +77,7 @@ export const Example1 = (app: HTMLDivElement) => {
         },
         plugins: [
             gradientPlugin.getPlugin(),
+            linePlugin.getPlugin()
         ],
 
     })
