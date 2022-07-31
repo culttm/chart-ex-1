@@ -480,3 +480,8 @@ export const Data = () => [
         value: ~~(Math.random() * 100) + 2
     },
 ]
+
+export const generateData = () => {
+    const rawData = Data();
+    return rawData.slice(0, Math.floor(Math.random() * rawData.length))
+}

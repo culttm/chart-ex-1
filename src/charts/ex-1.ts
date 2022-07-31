@@ -1,5 +1,5 @@
 import {Chart, registerables} from "chart.js";
-import {Data} from "./data";
+import { generateData } from "./data";
 import {GradientPlugin} from "./gradient.plugin";
 import { CustomTooltipPlugin } from './custom-tooltip.plugin'
 import { FooterPlugin } from './footer.plugin'
@@ -12,10 +12,12 @@ const customTooltip = new CustomTooltipPlugin(baseColorRgb);
 const gradientPlugin = new GradientPlugin(baseColorRgb);
 const footerPlugin = new FooterPlugin();
 
+
 export const Example1 = (app: HTMLDivElement) => {
     const canvas = app.querySelector('canvas') as HTMLCanvasElement;
-    const data = Data();
-    console.log(data.length)
+
+    const data = generateData();
+
     const pointRadius = () => Array.from({length: data.length}, (_, i) => {
         if (i === 0 || i === data.length - 1) return 2
         return 0
