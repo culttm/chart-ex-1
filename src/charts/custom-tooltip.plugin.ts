@@ -28,7 +28,7 @@ function roundedRect(x: number, y: number, width: number, height: number, radius
 
 export class CustomTooltipPlugin {
 
-    constructor(private color: string) {
+    constructor(private color: string, private sign: string) {
     }
 
     private plugin(chart: Chart) {
@@ -52,7 +52,7 @@ export class CustomTooltipPlugin {
         };
 
 
-        const priceText = `$${tooltipData.value}`;
+        const priceText = `${this.sign}${tooltipData.value}`;
         const partPriceWidth = ctx.measureText(priceText).width;
 
         ctx.font = 'normal 11px sans-serif';

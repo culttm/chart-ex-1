@@ -8,9 +8,9 @@ Chart.register(...registerables);
 
 const baseColor = 'rgba(0, 200, 83, 1)';
 const baseColorRgb = '0, 200, 83';
-const customTooltip = new CustomTooltipPlugin(baseColorRgb);
+const customTooltip = new CustomTooltipPlugin(baseColorRgb, '$');
 const gradientPlugin = new GradientPlugin(baseColorRgb);
-const footerPlugin = new FooterPlugin();
+const footerPlugin = new FooterPlugin('$');
 
 
 export const Example1 = (app: HTMLDivElement) => {

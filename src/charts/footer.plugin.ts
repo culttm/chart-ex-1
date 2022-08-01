@@ -1,8 +1,12 @@
 import {Chart} from "chart.js";
 
+
 export class FooterPlugin {
 
-    private static plugin(chart: Chart): void {
+    constructor(private sign: string) {
+    }
+
+    private plugin(chart: Chart): void {
         const ctx = chart.ctx;
 
         const tooltipDataFirst = {
@@ -30,10 +34,10 @@ export class FooterPlugin {
         ctx.font = 'normal 10px sans-serif';
         ctx.fillStyle = 'rgba(160, 160, 160, 1)'
 
-        const firstText = `$${tooltipDataFirst.value} (${tooltipDataFirst.label})`;
+        const firstText = `${this.sign}${tooltipDataFirst.value} (${tooltipDataFirst.label})`;
         ctx.fillText(firstText, 10, y + 14);
 
-        const lastText = `$${tooltipDataLast.value} (${tooltipDataLast.label})`;
+        const lastText = `${this.sign}${tooltipDataLast.value} (${tooltipDataLast.label})`;
         const partDateWidth = ctx.measureText(lastText).width;
         ctx.fillText(lastText, x - partDateWidth, y + 14);
 
@@ -44,7 +48,7 @@ export class FooterPlugin {
     getPlugin() {
         return {
             id: "footerPlugin",
-            afterDraw: FooterPlugin.plugin.bind(this)
+            afterDraw: this.plugin.bind(this)
         }
     }
 }
