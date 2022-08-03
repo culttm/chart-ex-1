@@ -1,12 +1,8 @@
 import {Chart} from "chart.js";
-import {Theme} from "./theme";
-import {hex2rgba} from "./hex2rgba";
-
-
-const formatDate = (date: Date) => {
-    const dateArray = date.toLocaleDateString().split('/');
-    return `${dateArray[0]}/${dateArray[1]}`;
-}
+import {Theme} from "../theme";
+import {hex2rgba} from "../utils/hex2rgba";
+import {formatDate} from "../utils/format-date";
+import {xPosition} from "../utils/x-position";
 
 export class FooterPlugin {
 
@@ -30,21 +26,13 @@ export class FooterPlugin {
 
 
         if (!chart.tooltip?.getActiveElements().length) {
-            const tooltipDataFirst = {
-                label: formatDate((chart.data.labels as Date[])[0])
-            };
-
-            const tooltipDataLast = {
-                label: formatDate(chart.data.labels?.find((_, i) => i === dataSetData.length - 1) as Date)
-            };
-
             ctx.font = 'normal 10px sans-serif';
             ctx.fillStyle = hex2rgba(this.theme.footer.color);
 
-            const firstText = `${tooltipDataFirst.label}`;
+            const firstText = `${formatDate((chart.data.labels as Date[])[0])}`;
             ctx.fillText(firstText, 10, y + 14);
 
-            const lastText = `${tooltipDataLast.label}`;
+            const lastText = `${formatDate(chart.data.labels?.find((_, i) => i === dataSetData.length - 1) as Date)}`;
             const partDateWidth = ctx.measureText(lastText).width;
 
             ctx.fillText(lastText, x - partDateWidth, y + 14);
@@ -58,25 +46,13 @@ export class FooterPlugin {
                 return;
             }
 
-            const tooltipData = {
-                label: formatDate(chart.data.labels?.find((_, i) => i === tooltip.index) as Date)
-            };
-
             ctx.font = 'normal 10px sans-serif';
             ctx.fillStyle = hex2rgba(this.theme.footer.color);
 
-            const text = `${tooltipData.label}`;
+            const text = `${formatDate(chart.data.labels?.find((_, i) => i === tooltip.index) as Date)}`;
             const width = ctx.measureText(text).width;
 
-            let left = x - (width / 2);
-
-            if (x < (width / 2)) {
-                left = 0;
-            } else if ((x + width) > ((chart.canvas.clientWidth * 2) - x)) {
-                left = chart.canvas.clientWidth - width
-            }
-
-            ctx.fillText(text, left, y + 14);
+            ctx.fillText(text, xPosition(x, width, chart.canvas.clientWidth), y + 14);
 
             ctx.restore();
         }

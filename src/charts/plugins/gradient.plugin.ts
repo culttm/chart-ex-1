@@ -1,6 +1,6 @@
 import {Chart} from "chart.js";
-import {Theme} from "./theme";
-import {hex2rgba} from "./hex2rgba";
+import {Theme} from "../theme";
+import {hex2rgba} from "../utils/hex2rgba";
 
 export class GradientPlugin {
 

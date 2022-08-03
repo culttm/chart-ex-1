@@ -1,12 +1,17 @@
 import {Chart} from "chart.js";
-import {roundedRect} from "./rouned-rect";
-import {rectCorner} from "./rect-corner";
-import {Theme} from "./theme";
-import {hex2rgba} from "./hex2rgba";
+import {roundedRect} from "../utils/rouned-rect";
+import {rectCorner} from "../utils/rect-corner";
+import {Theme} from "../theme";
+import {hex2rgba} from "../utils/hex2rgba";
+import {xPosition} from "../utils/x-position";
 
 export class CustomTooltipPlugin {
 
     constructor(private theme: Theme, private placeholder: string) {
+    }
+
+    private getFormattedValue(value: string): string {
+        return this.placeholder.replace('__VALUE__', value)
     }
 
     private plugin(chart: Chart) {
@@ -20,10 +25,10 @@ export class CustomTooltipPlugin {
             const lastPoint = dataSet[dataSet.length - 1] as any;
 
             ctx.font = 'normal 9px sans-serif';
-            const firstDataText = this.placeholder.replace('__VALUE__', firstPoint.$context.raw)
+            const firstDataText = this.getFormattedValue(firstPoint.$context.raw)
             const firstDataTextWidth = ctx.measureText(firstDataText).width + 10;
 
-            const lastDataText = this.placeholder.replace('__VALUE__', lastPoint.$context.raw)
+            const lastDataText = this.getFormattedValue(lastPoint.$context.raw)
             const lastDataTextWidth = ctx.measureText(lastDataText).width + 10;
 
             ctx.fillStyle = hex2rgba(this.theme.tooltip.initial.bg);
@@ -49,7 +54,7 @@ export class CustomTooltipPlugin {
             }
 
             // @ts-ignore
-            const priceText = this.placeholder.replace('__VALUE__', chart.data.datasets[0].data[tooltip.index] as string);
+            const priceText = this.getFormattedValue(chart.data.datasets[0].data[tooltip.index] as string);
             const partPriceWidth = ctx.measureText(priceText).width;
 
             ctx.font = 'normal 11px sans-serif';
@@ -57,14 +62,8 @@ export class CustomTooltipPlugin {
             const width = partPriceWidth + 16;
 
 
-            let left = x - (width / 2);
-            let pontLeft = (left + width / 2);
-
-            if (x < (width / 2)) {
-                left = 0;
-            } else if ((x + width) > ((chart.canvas.clientWidth * 2) - x)) {
-                left = chart.canvas.clientWidth - width
-            }
+            const left = xPosition(x, width, chart.canvas.clientWidth);
+            const pontLeft = (left + width / 2);
 
             ctx.save();
             ctx.beginPath();

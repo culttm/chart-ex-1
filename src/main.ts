@@ -1,10 +1,4 @@
 import './style.css'
-// import {Corner} from "./charts/corner";
-import {Example1} from "./charts/ex-1";
-//
-document.querySelectorAll('[data-chart]').forEach(el => Example1(el as HTMLDivElement))
+import { ChartApp } from "./charts/chart";
 
-
-// const canvas = new Corner(document.getElementById('example') as HTMLCanvasElement);
-
-// canvas.draw();
+document.querySelectorAll('[data-chart]').forEach(el => ChartApp(el as HTMLDivElement))
