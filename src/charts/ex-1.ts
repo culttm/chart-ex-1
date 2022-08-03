@@ -7,14 +7,19 @@ import {themes} from "./theme";
 import {hex2rgba} from "./hex2rgba";
 Chart.register(...registerables);
 
+function generateRandomInteger(min: number, max: number) {
+    return Math.floor(min + Math.random()*(max - min + 1))
+}
+
 
 export const Example1 = (app: HTMLDivElement) => {
     const canvas = app.querySelector('canvas') as HTMLCanvasElement;
 
 
     // TODO -------
-    const randomNumber = ~~(Math.random() * 3);
+    const randomNumber = generateRandomInteger(0, 2);
     const currentTheme = Object.values(themes)[randomNumber];
+    // const currentTheme = themes['gray'];
     // TODO -------
 
     const customTooltip = new CustomTooltipPlugin(currentTheme, '$ __VALUE__');

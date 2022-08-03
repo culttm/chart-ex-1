@@ -9,7 +9,7 @@ export class GradientPlugin {
     private plugin(chart: Chart) {
         const scales = chart.scales;
         const color = chart.ctx.createLinearGradient(0, scales["y"].top,0, scales["y"].bottom);
-        color.addColorStop(0.8, hex2rgba(this.theme.baseColor, .15));
+        color.addColorStop(0.4, hex2rgba(this.theme.baseColor, .1));
         color.addColorStop(1, hex2rgba(this.theme.baseColor, 0));
         chart.data.datasets[0].backgroundColor = color;
     }

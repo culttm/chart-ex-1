@@ -29,7 +29,7 @@ export const themes: Record<string, Theme> = {
             }
         },
         footer: {
-            color: '#656565'
+            color: '#A0A0A0'
         }
     },
     green: {
@@ -45,7 +45,7 @@ export const themes: Record<string, Theme> = {
             }
         },
         footer: {
-            color: '#656565'
+            color: '#A0A0A0'
         }
     },
     gray: {
@@ -61,7 +61,7 @@ export const themes: Record<string, Theme> = {
             }
         },
         footer: {
-            color: '#656565'
+            color: '#A0A0A0'
         }
     }
 }
