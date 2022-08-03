@@ -1,14 +1,18 @@
 import {Chart} from "chart.js";
+import {Theme} from "./theme";
+import {hex2rgba} from "./hex2rgba";
 
 
 const formatDate = (date: Date) => {
-    const dateArray = date.toLocaleDateString().split('/');
-    return `${dateArray[0]}/${dateArray[1]}`;
+    const y = date.getFullYear();
+    const m = date.getMonth() + 1;
+    const d = date.getDate();
+    return `${d} ${m} ${y}`;
 }
 
 export class FooterPlugin {
 
-    constructor() {
+    constructor(private theme: Theme) {
     }
 
     private plugin(chart: Chart): void {
@@ -26,59 +30,58 @@ export class FooterPlugin {
         ctx.lineTo(x, y);
         ctx.stroke();
 
-        const tooltipDataFirst = {
-            label: formatDate((chart.data.labels as Date[])[0])
-        };
 
-        const tooltipDataLast = {
-            label: formatDate(chart.data.labels?.find((_, i) => i === dataSetData.length - 1) as Date)
-        };
+        if (!chart.tooltip?.getActiveElements().length) {
+            const tooltipDataFirst = {
+                label: formatDate((chart.data.labels as Date[])[0])
+            };
 
-        ctx.font = 'normal 10px sans-serif';
-        ctx.fillStyle = '#333';
+            const tooltipDataLast = {
+                label: formatDate(chart.data.labels?.find((_, i) => i === dataSetData.length - 1) as Date)
+            };
 
-        const firstText = `${tooltipDataFirst.label}`;
-        ctx.fillText(firstText, 10, y + 14);
+            ctx.font = 'normal 10px sans-serif';
+            ctx.fillStyle = hex2rgba(this.theme.footer.color);
 
-        const lastText = `${tooltipDataLast.label}`;
-        const partDateWidth = ctx.measureText(lastText).width;
+            const firstText = `${tooltipDataFirst.label}`;
+            ctx.fillText(firstText, 10, y + 14);
 
-        ctx.fillText(lastText, x - partDateWidth, y + 14);
-        ctx.restore();
+            const lastText = `${tooltipDataLast.label}`;
+            const partDateWidth = ctx.measureText(lastText).width;
 
-        // if (!chart.tooltip?.getActiveElements().length) {
-        //
-        //
-        // }
+            ctx.fillText(lastText, x - partDateWidth, y + 14);
+            ctx.restore();
 
-        // else {
-        //     const tooltip = chart.tooltip.getActiveElements()[0];
-        //     const x = chart.tooltip.getActiveElements()[0].element.x;
-        //
-        //     if (!x) {
-        //         return;
-        //     }
-        //
-        //     const tooltipData = {
-        //         label: formatDate(chart.data.labels?.find((_, i) => i === tooltip.index) as Date)
-        //     };
-        //
-        //     console.log({
-        //         x,
-        //         label: tooltipData.label
-        //     });
-        //
-        //
-        //     ctx.font = 'normal 10px sans-serif';
-        //     ctx.fillStyle = '#333';
-        //
-        //     const firstText = `${tooltipData.label}`;
-        //     const w = ctx.measureText(firstText).width;
-        //     ctx.fillText(firstText, x - w / 2, y + 14);
-        //
-        //     ctx.restore();
-        // }
+        } else {
+            const tooltip = chart.tooltip.getActiveElements()[0];
+            const x = chart.tooltip.getActiveElements()[0].element.x;
 
+            if (!x) {
+                return;
+            }
+
+            const tooltipData = {
+                label: formatDate(chart.data.labels?.find((_, i) => i === tooltip.index) as Date)
+            };
+
+            ctx.font = 'normal 10px sans-serif';
+            ctx.fillStyle = hex2rgba(this.theme.footer.color);
+
+            const text = `${tooltipData.label}`;
+            const width = ctx.measureText(text).width;
+
+            let left = x - (width / 2);
+
+            if (x < (width / 2)) {
+                left = 0;
+            } else if ((x + width) > ((chart.canvas.clientWidth * 2) - x)) {
+                left = chart.canvas.clientWidth - width
+            }
+
+            ctx.fillText(text, left, y + 14);
+
+            ctx.restore();
+        }
 
     }
 

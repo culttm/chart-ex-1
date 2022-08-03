@@ -1,14 +1,16 @@
 import {Chart} from "chart.js";
+import {Theme} from "./theme";
+import {hex2rgba} from "./hex2rgba";
 
 export class GradientPlugin {
 
-    constructor(private color: string) {}
+    constructor(private theme: Theme) {}
 
     private plugin(chart: Chart) {
         const scales = chart.scales;
         const color = chart.ctx.createLinearGradient(0, scales["y"].top,0, scales["y"].bottom);
-        color.addColorStop(0.8, "rgba(" + this.color + ", 0.1)");
-        color.addColorStop(1, "rgba(" + this.color + ", 0)");
+        color.addColorStop(0.8, hex2rgba(this.theme.baseColor, .15));
+        color.addColorStop(1, hex2rgba(this.theme.baseColor, 0));
         chart.data.datasets[0].backgroundColor = color;
     }
 

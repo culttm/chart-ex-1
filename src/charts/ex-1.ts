@@ -3,18 +3,23 @@ import { generateData } from "./data";
 import {GradientPlugin} from "./gradient.plugin";
 import { CustomTooltipPlugin } from './custom-tooltip.plugin'
 import { FooterPlugin } from './footer.plugin'
+import {themes} from "./theme";
+import {hex2rgba} from "./hex2rgba";
 Chart.register(...registerables);
-
-
-const baseColor = 'rgba(0, 200, 83, 1)';
-const baseColorRgb = '0, 200, 83';
-const customTooltip = new CustomTooltipPlugin(baseColorRgb, '$');
-const gradientPlugin = new GradientPlugin(baseColorRgb);
-const footerPlugin = new FooterPlugin();
 
 
 export const Example1 = (app: HTMLDivElement) => {
     const canvas = app.querySelector('canvas') as HTMLCanvasElement;
+
+
+    // TODO -------
+    const randomNumber = ~~(Math.random() * 2);
+    const currentTheme = Object.values(themes)[randomNumber];
+    // TODO -------
+
+    const customTooltip = new CustomTooltipPlugin(currentTheme, '$ __VALUE__');
+    const footerPlugin = new FooterPlugin(currentTheme);
+    const gradientPlugin = new GradientPlugin(currentTheme);
 
     const data = generateData();
 
@@ -31,11 +36,11 @@ export const Example1 = (app: HTMLDivElement) => {
             datasets: [
                 {
                     borderWidth: 1,
-                    borderColor: baseColor,
+                    borderColor: hex2rgba(currentTheme.baseColor),
                     fill: true,
                     data: data.map(({ value }) => value),
-                    pointBackgroundColor: baseColor,
-                    hoverBackgroundColor: baseColor,
+                    pointBackgroundColor: hex2rgba(currentTheme.baseColor),
+                    hoverBackgroundColor: hex2rgba(currentTheme.baseColor),
                     pointRadius: pointRadiusValue,
                     pointBorderWidth: 0,
                     pointHitRadius: 0,
