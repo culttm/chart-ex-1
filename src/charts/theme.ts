@@ -47,5 +47,21 @@ export const themes: Record<string, Theme> = {
         footer: {
             color: '#656565'
         }
+    },
+    gray: {
+        baseColor: '#D0D0D0',
+        tooltip: {
+            initial: {
+                color: '#A0A0A0',
+                bg: '#FAFAFA'
+            },
+            dynamic: {
+                color: '#fff',
+                bg: '#656565'
+            }
+        },
+        footer: {
+            color: '#656565'
+        }
     }
 }

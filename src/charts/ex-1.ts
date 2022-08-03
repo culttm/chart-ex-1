@@ -13,7 +13,7 @@ export const Example1 = (app: HTMLDivElement) => {
 
 
     // TODO -------
-    const randomNumber = ~~(Math.random() * 2);
+    const randomNumber = ~~(Math.random() * 3);
     const currentTheme = Object.values(themes)[randomNumber];
     // TODO -------
 
