@@ -4,10 +4,8 @@ import {hex2rgba} from "./hex2rgba";
 
 
 const formatDate = (date: Date) => {
-    const y = date.getFullYear();
-    const m = date.getMonth() + 1;
-    const d = date.getDate();
-    return `${d} ${m} ${y}`;
+    const dateArray = date.toLocaleDateString().split('/');
+    return `${dateArray[0]}/${dateArray[1]}`;
 }
 
 export class FooterPlugin {
