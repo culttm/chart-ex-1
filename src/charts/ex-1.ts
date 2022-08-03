@@ -10,7 +10,7 @@ const baseColor = 'rgba(0, 200, 83, 1)';
 const baseColorRgb = '0, 200, 83';
 const customTooltip = new CustomTooltipPlugin(baseColorRgb, '$');
 const gradientPlugin = new GradientPlugin(baseColorRgb);
-const footerPlugin = new FooterPlugin('$');
+const footerPlugin = new FooterPlugin();
 
 
 export const Example1 = (app: HTMLDivElement) => {
@@ -42,7 +42,7 @@ export const Example1 = (app: HTMLDivElement) => {
                     pointHoverRadius: 3,
                     hoverBorderWidth: 0,
                     tension: 0,
-                    spanGaps: false
+                    spanGaps: false,
                 }
             ],
         },
@@ -76,7 +76,7 @@ export const Example1 = (app: HTMLDivElement) => {
             interaction: {
                 intersect: false,
                 mode: 'index',
-            }
+            },
         },
         plugins: [
             gradientPlugin.getPlugin(),
