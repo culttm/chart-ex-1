@@ -7,7 +7,7 @@ import { xPosition } from "../utils/x-position";
 export class FooterPlugin {
     constructor(private theme: Theme) {}
 
-    private static offset = 10;
+    private static offset = 0;
 
     private plugin(chart: Chart): void {
         const ctx = chart.ctx;
